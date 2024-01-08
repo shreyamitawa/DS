@@ -1,0 +1,70 @@
+
+#include <stdio.h>
+#include <stdlib.h>
+
+// Definition of the MyStack structure
+typedef struct MyStack {
+    int *data;       // Array to store the stack elements
+    int top;         // Index of the top element in the stack
+    int capacity;    // Maximum capacity of the stack
+} MyStack;
+
+// Function to create a new stack
+MyStack* myStackCreate() {
+    // Allocate memory for the MyStack structure
+    MyStack* obj = (MyStack*)malloc(sizeof(MyStack));
+    
+    // Allocate memory for the stack data (array of integers)
+    obj->data = (int*)malloc(sizeof(int) * 1000);
+    
+    // Initialize the top index to -1 (empty stack)
+    obj->top = -1;
+    
+    // Set the maximum capacity of the stack to 1000
+    obj->capacity = 1000;
+    
+    return obj;
+}
+
+// Function to push an element onto the stack
+void myStackPush(MyStack* obj, int x) {
+    // Increment the top index
+    obj->top++;
+    
+    // Store the new element at the top index in the stack
+    obj->data[obj->top] = x;
+}
+
+// Function to pop an element from the stack
+int myStackPop(MyStack* obj) {
+
+    // Retrieve the element at the top index
+    int popped = obj->data[obj->top];
+
+    // Decrement the top index to remove the element
+    obj->top--;
+    
+    // Return the popped element
+    return popped;
+}
+
+// Function to get the top element of the stack without popping it
+int myStackTop(MyStack* obj) {
+    // Retrieve and return the element at the top index
+    return obj->data[obj->top];
+}
+
+// Function to check if the stack is empty
+bool myStackEmpty(MyStack* obj) {
+    // Check if the top index is -1 (empty stack)
+    return obj->top == -1;
+}
+
+// Function to free the allocated memory for the stack
+void myStackFree(MyStack* obj) {
+    // Free the memory allocated for the stack data
+    free(obj->data);
+    
+    // Free the memory allocated for the MyStack structure
+    free(obj);
+}
